@@ -1,110 +1,76 @@
 <template>
-  <v-app>
+	<v-app>
+		<v-main class="body">
+		<!-- ------ BARRA DE FERRAMENTAS ------ -->
+			<div class="background"></div>
+			<div>
+				<v-toolbar dark prominent>
+					<v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-    <v-main class="body">
-      <div>
-        <!-- ------ BARRA DE FERRAMENTAS ------ -->
-        <v-toolbar
-          image="https://ficr.catolica.edu.br/portal/wp-content/uploads/2019/07/Fachada-FICR.jpg"
-          dark
-          prominent
-        >
-          <v-app-bar-nav-icon></v-app-bar-nav-icon>
+					<v-toolbar-title>Tela de Cursos</v-toolbar-title>
 
-          <v-toolbar-title>Tela de Cursos</v-toolbar-title>
+					<v-spacer></v-spacer>
 
-          <v-spacer></v-spacer>
+					<v-btn icon>
+						<v-icon>mdi-export</v-icon>
+					</v-btn>
+				</v-toolbar>
+			</div>
+			<div class="container">
+				<v-container class="adicionar__curso">
+					<h2 class="titulo__container">Adicionar curso</h2>
 
-          <v-btn icon>
-            <v-icon>mdi-export</v-icon>
-          </v-btn>
-        </v-toolbar>
-      </div>
+				</v-container>
 
-      <!-- ------------------- BODY ------------------- -->
+				<v-container class="adicionar__curso">
+					<h2 class="titulo__container">Adicionar curso</h2>
 
-      <div class="container">
-        <v-container class="adicionar__curso">
-          Inserir cursos
-        </v-container>
+				</v-container>
 
-        <v-container class="adicionar__curso">
-          Inserir cursos
-        </v-container>
-
-        <v-container class="adicionar__curso">
-          Inserir cursos
-        </v-container>
-      </div>
-
-    </v-main>
-
-    <!-- FOOTER -->
-
-    <v-footer class="d-flex flex-column">
-      <div class="bg-teal d-flex w-100 align-center px-4">
-        <strong>Get connected with us on social networks!</strong>
-
-        <v-spacer></v-spacer>
-
-        <v-btn
-          v-for="icon in icons"
-          :key="icon"
-          :icon="icon"
-          class="mx-4"
-          size="small"
-          variant="plain"
-        ></v-btn>
-      </div>
-
-      <div class="px-4 py-2 bg-black text-center w-100">
-        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-      </div>
-    </v-footer>
-
-  </v-app>
+				<v-container class="adicionar__curso">
+					<h2 class="titulo__container">Adicionar curso</h2>
+					
+				</v-container>
+			</div>
+		</v-main>
+		<!-- FOOTER -->
+		<!-- <v-footer dark class="d-flex flex-column">
+			<div class="bg-teal d-flex w-100 align-center px-4">
+				<strong>Mantenha-se conectado por meio das nossas redes sociais!</strong>
+				<v-spacer></v-spacer>
+				<v-btn
+				v-for="icon in icons"
+				:key="icon"
+				:icon="icon"
+				class="mx-4"
+				size="small"
+				variant="plain"
+				></v-btn>
+			</div>
+			<div class="px-4 py-2 bg-black text-center w-100">
+				{{ new Date().getFullYear() }} — <strong>by Felipe Sabino</strong>
+			</div>
+		</v-footer> -->
+		<v-footer class="bg-grey-lighten-1">
+			<v-row justify="center" no-gutters>
+			<v-btn
+				v-for="link in links"
+				:key="link"
+				class="mx-2"
+				color="white"
+				rounded="xl"
+				variant="text"
+			>
+				{{ link }}
+			</v-btn>
+			<v-col class="text-center mt-4" cols="12">
+				{{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+			</v-col>
+			</v-row>
+		</v-footer>
+	</v-app>
 </template>
 
+<script src="./components/script"></script>
 
-<!-- ----------------------- SCRIPT ----------------------- -->
-
-<script>
-
-
-
-
-/* ----- FOOTER ----- */
-
-export default {
-    data: () => ({
-      icons: [
-        'mdi-facebook',
-        'mdi-twitter',
-        'mdi-linkedin',
-        'mdi-instagram',
-      ],
-    }),
-  }
-
-</script>
-
-<style>
-
-.body{
-  font-size: 62.5%;
-}
-
-.container{
-  align-items: center;
-  
-  max-width: 1152px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.adicionar__curso{
-  font-size: 5.0em;
-}
-
-</style>
+<style src="./components/style.css"></style>
