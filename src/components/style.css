@@ -17,6 +17,8 @@
 	z-index: 0;
   }
 
+/* ------------------- BODY ------------------  */
+
 .container{
 	align-items: center;
 	max-width: 1152px;
@@ -26,18 +28,86 @@
 	z-index: 1;
 }
 
+.barra__d__navegacao{
+	align-self: center;
+	width: 2500px; 
+}
+
 .adicionar__curso{
-	border: 4px solid;
+	max-width: 100%;
+}
+
+.adicionar__curso, .listar__curso{
+	border: 7.5px solid;
 	margin-bottom: 50px;
 	color: var(--color-white);
 	background: var(--color-gray-dark);
-	border-radius: 15px;
+	border-radius: 10px;
 	animation: spin 2.5s linear infinite;
-	filter: none;
+	font-size: 2em;
 }
 
+.adicionar__curso .v-select .v-input__slot {
+	color: var(--color-white);
+}
+
+.adicionar__curso input[type="text"],
+.adicionar__curso textarea,
+.adicionar__curso select {
+	background-color: var(--color-white); 
+	border: 1px solid var(--color-gray-light); 
+	margin-bottom: 10px;
+	border-radius: 10px;
+}
+
+.adicionar__curso input[type="number"]{
+	max-width: 45px;
+}
+
+.adicionar__curso select {
+	height: auto;
+}
+
+.v-select__selection {
+	padding: 0;
+	margin: 0;
+}
+
+.categoria-select .v-select__selection {
+	color: var(--color-white);
+
+}
+  
+
+  
+.categoria-select .v-input__slot {
+	background-color: var(--color-gray-dark);
+}
+
+.agrupamento__container {
+	width: 385px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+
+.agrupamento__container label {
+    flex: 1;
+    margin-right: 1rem;
+}
+
+.agrupamento__container input,
+.agrupamento__container textarea,
+.agrupamento__container v-select,
+.agrupamento__container v-radio-group {
+    flex: 2;
+}
+
+
 .titulo__container{
-    font-size: 2.6em;
+	animation: spin 2.5s linear infinite;
 }
 
 /* ------------------IMPORTS------------------ */
