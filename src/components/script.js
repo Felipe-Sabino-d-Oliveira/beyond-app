@@ -1,12 +1,11 @@
 export default {
   data: () => ({
     links: [
-      'Home',
-      'About Us',
-      'Team',
-      'Services',
+      'Início',
+      'Cursos',
+      'Mais Serviços',
       'Blog',
-      'Contact Us',
+      'Sobre Nós',
     ],
     cursos: [],
     novoCurso: {
@@ -18,12 +17,14 @@ export default {
       certificacao: ''
     },
     categorias: ['Tecnologia', 'Saúde', 'Educação', 'Negócios', 'Artes'],
-
+    dialogAdicionarCurso: false,
+    dialogAtualizarCurso: false,
+    indexAtualizarCurso: -1 // Inicialize com um valor que não interfere nos índices
   }),
   
   methods: {
-    adicionarCurso() {
-      this.cursos.push({...this.novoCurso});
+    abrirJanelaAdicionarCurso() {
+      // Limpa o estado novoCurso
       this.novoCurso = {
         nome: '',
         descricao: '',
@@ -32,12 +33,29 @@ export default {
         duracaoSemestres: 0,
         certificacao: ''
       };
+      this.dialogAdicionarCurso = true;
+    },
+    
+    abrirJanelaAtualizarCurso(curso, index) {
+      // Copia os detalhes do curso para novoCurso
+      this.novoCurso = { ...curso };
+      this.dialogAtualizarCurso = true;
+      this.indexAtualizarCurso = index;
+    },
+
+    adicionarCurso() {
+      this.cursos.push(this.novoCurso);
+      this.dialogAdicionarCurso = false;
     },
     removerCurso(index) {
       this.cursos.splice(index, 1);
     },
-    // atualizarCurso(index) {
-    //   // Lógica de atualização aqui
-    // }
+
+    atualizarCurso() {
+      if (this.indexAtualizarCurso !== -1) {
+        this.cursos.splice(this.indexAtualizarCurso, 1, this.novoCurso);
+        this.dialogAtualizarCurso = false;
+      }
+    },    
   }
 }
