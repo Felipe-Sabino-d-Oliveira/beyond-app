@@ -87,11 +87,13 @@
 								<v-list-item-subtitle>Certificação: {{ curso.certificacao }}</v-list-item-subtitle>
 							</v-list-item-content>
 							<v-btn icon @click="abrirJanelaAtualizarCurso(curso, index)">
-								<v-icon>mdi-pencil</v-icon>
+								<v-icon>{{ icons.mdiPencil }}</v-icon>
 							</v-btn>
-							<v-btn icon @click="removerCurso(index)">
-								<v-icon>mdi-delete</v-icon>
-								<hr>
+							<v-btn depressed icon @click="removerCurso(index)">
+								<v-icon>
+									{{ icons.mdiDelete }}
+								</v-icon>
+
 							</v-btn>
 						</v-list-item>
 					</v-list>
@@ -135,8 +137,10 @@
 							<div class="agrupamento__container certificacao__container">
 								<label>Certificação</label>
 								<div class="certificacao__options">
-									<v-radio v-model="novoCurso.certificacao" class="certificacao__radio sim" label="Sim" value="sim"></v-radio>
-									<v-radio v-model="novoCurso.certificacao" class="certificacao__radio sim" label="Não" value="nao"></v-radio>
+									<v-radio v-model="novoCurso.certificacao" class="certificacao__radio sim" label="Sim"
+										value="sim"></v-radio>
+									<v-radio v-model="novoCurso.certificacao" class="certificacao__radio sim" label="Não"
+										value="nao"></v-radio>
 								</div>
 							</div>
 

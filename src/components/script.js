@@ -1,3 +1,8 @@
+import{
+  mdiPencil,
+  mdiDelete,
+}from '@mdi/js'
+
 export default {
   data: () => ({
     links: [
@@ -19,7 +24,12 @@ export default {
     categorias: ['Tecnologia', 'Saúde', 'Educação', 'Negócios', 'Artes'],
     dialogAdicionarCurso: false,
     dialogAtualizarCurso: false,
-    indexAtualizarCurso: -1 // Inicialize com um valor que não interfere nos índices
+    indexAtualizarCurso: -1, // Inicialize com um valor que não interfere nos índices
+
+    icons: {
+      mdiPencil,
+      mdiDelete,   
+    },
   }),
   
   methods: {
