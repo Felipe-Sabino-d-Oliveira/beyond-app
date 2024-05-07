@@ -1,18 +1,8 @@
 <template>
 	<v-app>
 		<v-main class="body">
-			<!-- ------ BARRA DE FERRAMENTAS ------ -->
+			<!-- HEADER -->
 			<div class="background"></div>
-			<div>
-				<v-toolbar class="barra__de__tarefas" dark prominent elevation="4">
-					<nav class="barra__d__navegacao text-center">
-						<v-btn v-for="link in links" :key="link" class="mx-2" color="white" text>
-							{{ link }}
-						</v-btn>
-					</nav>
-				</v-toolbar>
-			</div>
-
 			<div class="container">
 				<v-btn class="botao__adicionar__curso" @click="abrirJanelaAdicionarCurso()">Adicionar Curso</v-btn>
 				<v-dialog v-model="dialogAdicionarCurso" max-width="750px">
