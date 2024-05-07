@@ -80,7 +80,7 @@
 							<v-list-item-content>
 								<v-list-item-title>{{ curso.nome }}</v-list-item-title>
 								<v-list-item-subtitle>Descrição: {{ curso.descricao }}</v-list-item-subtitle>
-								<v-list-item-subtitle>Categoria: {{ curso.categoria }}</v-list-item-subtitle>
+								<v-list-item-subtitle class="categoria__cursos">Categoria: {{ curso.categoria }}</v-list-item-subtitle>
 								<v-list-item-subtitle>Instrutor: {{ curso.instrutor }}</v-list-item-subtitle>
 								<v-list-item-subtitle>Duração em Semestres: {{ curso.duracaoSemestres
 								}}</v-list-item-subtitle>
