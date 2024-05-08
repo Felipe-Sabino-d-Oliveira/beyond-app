@@ -10,5 +10,30 @@
     </div>
 </template>
 
-<style src="../components/style.css"></style>
-<script src="../components/script"></script>
+<script>
+export default {
+    name: 'Header',
+    data: () => ({
+        links: [
+            'Início',
+            'Cursos',
+            'Mais Serviços',
+            'Blog',
+            'Sobre Nós',
+        ],
+    }),
+}
+</script>
+
+<style>
+
+.barra__de__tarefas, .footer{
+	z-index: 1;
+}
+
+.barra__d__navegacao{
+	align-self: center;
+	width: 2500px; 
+}
+
+</style>
