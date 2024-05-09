@@ -151,6 +151,9 @@
 </template>
 
 <script>
+export default {
+    name: 'Cursos'
+}
 </script>
 
 <style>

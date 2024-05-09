@@ -2,7 +2,8 @@
 	<v-app>
 		<v-main class="main">
 			<Header />
-			<Home />
+			<!-- <Home /> -->
+			<router-view></router-view>
 			<Footer />
 		</v-main>
 	</v-app>
@@ -10,7 +11,7 @@
 <script setup>
 import Header from './components/Header.vue';
 import Footer from './components/Footer.vue';
-import Home from './pages/Home.vue';
+// import Home from './pages/Home.vue';
 </script>
 
 <style>
