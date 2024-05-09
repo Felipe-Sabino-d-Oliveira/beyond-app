@@ -5,18 +5,18 @@
                 <img class="imagem__login" src="../assets/login.png" alt="imagem login">
             </div>
             <div class="metade__dois__do__conteudo">
-                <h1 class="titulo__login">LOGIN</h1>
+                <h1 class="titulo__login text-white">LOGIN</h1>
                 <form>
-                    <v-text-field v-model="email" :error-messages="emailErrors" label="E-mail" required class="text-white"
+                    <v-text-field v-model="email" :error-messages="emailErrors" label="E-mail" required
                         @input="$v.email.$touch()" @blur="$v.email.$touch()">
                     </v-text-field>
-                    <v-text-field v-model="password" :error-messages="passwordErrors" label="Senha" required class="text-white"
+                    <v-text-field v-model="password" :error-messages="passwordErrors" label="Senha" required
                         @input="$v.password.$touch()" @blur="$v.password.$touch()">
                     </v-text-field>
-                    <v-checkbox v-model="agree" label="Do you agree?" required class="text-white" @change="$v.agree.$touch()"
+                    <v-checkbox v-model="agree" label="Do you agree?" required @change="$v.agree.$touch()"
                         @blur="$v.agree.$touch()">
                     </v-checkbox>
-                    <v-btn class="mr-4" @click="submit">
+                    <v-btn class="mr-4" @click="submit" :disabled="!formValid">
                         submit
                     </v-btn>
                     <v-btn @click="clear">
@@ -39,6 +39,7 @@ export default {
         emailErrors: [],
         passwordErrors: [],
         checkboxErrors: [],
+        formValid: false,
     }),
     validations: {
         email: { required, email },
@@ -48,6 +49,10 @@ export default {
     methods: {
         submit() {
             this.$v.$touch()
+            this.formValid = !this.$v.$invalid
+            if (this.formValid) {
+                // enviar o formulário
+            }
         },
         clear() {
             this.$v.$reset()
@@ -60,10 +65,9 @@ export default {
 </script>
 
 <style>
-
 /* classes generalizadoras */
 
-.text-white{
+.text-white {
     color: var(--color-white);
 }
 

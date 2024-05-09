@@ -27,15 +27,15 @@ export default {
         getRoute(link) {
             switch (link) {
                 case 'Início':
-                    return '/';
+                    return 'home';
                 case 'Cursos':
-                    return '/cursos';
+                    return 'cursos';
                 case 'Mais Serviços':
-                    return '/mais-servicos';
+                    return 'mais-servicos';
                 case 'Blog':
-                    return '/blog';
+                    return 'blog';
                 case 'Sobre Nós':
-                    return '/sobre-nos';
+                    return 'sobre-nos';
                 default:
                     return '';
             }
