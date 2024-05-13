@@ -61,9 +61,9 @@
 				</v-card>
 			</v-dialog>
 			<v-container v-if="cursos.length > 0" class="listar__curso">
-				<h2>Lista de Cursos Cadastrados</h2>
+				<h2 class="titulo__container">Lista de Cursos Cadastrados</h2>
 				<v-list class="lista__dos__cursos">
-					<v-list-item v-for="curso in cursos" :key="curso.id">
+					<v-list-item v-for="(curso, index) in cursos" :key="curso.id">
 						<v-list-item-content>
 							<v-list-item-title>{{ curso.nome }}</v-list-item-title>
 							<v-list-item-subtitle>Descrição: {{ curso.descricao }}</v-list-item-subtitle>
@@ -151,133 +151,201 @@
 </template>
 
 <script>
+import {
+	mdiPencil,
+	mdiDelete,
+} from '@mdi/js'
+
 export default {
-    name: 'Cursos'
+	name: 'Cursos',
+	data: () => ({
+
+		cursos: [],
+		novoCurso: {
+			nome: '',
+			descricao: '',
+			categoria: '',
+			instrutor: '',
+			duracaoSemestres: 0,
+			certificacao: ''
+		},
+		categorias: ['Tecnologia', 'Saúde', 'Educação', 'Negócios', 'Artes'],
+		dialogAdicionarCurso: false,
+		dialogAtualizarCurso: false,
+		indexAtualizarCurso: -1, // Inicialize com um valor que não interfere nos índices
+		index: 0,
+
+		icons: {
+			mdiPencil,
+			mdiDelete,
+		},
+	}),
+	methods: {
+		abrirJanelaAdicionarCurso() {
+			// Limpa o estado novoCurso
+			this.novoCurso = {
+				nome: '',
+				descricao: '',
+				categoria: '',
+				instrutor: '',
+				duracaoSemestres: 0,
+				certificacao: ''
+			};
+			this.dialogAdicionarCurso = true;
+		},
+
+		abrirJanelaAtualizarCurso(curso, index) {
+			// Copia os detalhes do curso para novoCurso
+			this.novoCurso = { ...curso };
+			this.dialogAtualizarCurso = true;
+			this.indexAtualizarCurso = index;
+		},
+
+		adicionarCurso() {
+			this.cursos.push(this.novoCurso);
+			this.dialogAdicionarCurso = false;
+		},
+		removerCurso(index) {
+			this.cursos.splice(index, 1);
+		},
+
+		atualizarCurso() {
+			if (this.indexAtualizarCurso !== -1) {
+				this.cursos.splice(this.indexAtualizarCurso, 1, this.novoCurso);
+				this.dialogAtualizarCurso = false;
+			}
+		},
+	}
 }
 </script>
 
 <style>
-
-.container{
-    align-items: center;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    height: 100%;
-    background-image: url('https://lh3.googleusercontent.com/p/AF1QipPAbeq77kzNitDnQD4rssOYSjd5xwYpv-ltxQh3=s680-w680-h510');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    filter: grayscale(100%);
+.container {
+	align-items: center;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	max-width: 100%;
+	min-height: 1200px;
+	background-image: url('https://lh3.googleusercontent.com/p/AF1QipPAbeq77kzNitDnQD4rssOYSjd5xwYpv-ltxQh3=s680-w680-h510');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	filter: grayscale(100%);
 }
 
 
-.botao__adicionar__curso{
-    margin: 150px 0;
+.botao__adicionar__curso {
+	margin: 150px 0;
 }
 
-.adicionar__curso{
-    max-width: 100%;
+.adicionar__curso {
+	max-width: 100%;
 }
 
-.adicionar__curso div label{
-    font-size: 0.6em;
+.adicionar__curso div label {
+	font-size: 0.6em;
 }
 
-.adicionar__curso, .listar__curso{
-    border: 7.5px solid;
-    margin-bottom: 50px;
-    color: var(--color-white);
-    background: var(--color-gray-dark);
-    border-radius: 10px;
-    animation: spin 2.5s linear infinite;
-    font-size: 2em;
-    width: 800px;
+.adicionar__curso,
+.listar__curso {
+	border: 7.5px solid;
+	margin-bottom: 50px;
+	color: var(--color-white);
+	background: var(--color-gray-dark);
+	border-radius: 10px;
+	animation: spin 2.5s linear infinite;
+	font-size: 2em;
+	width: 800px;
 }
 
 .adicionar__curso .v-select .v-input__slot {
-    color: var(--color-white);
+	color: var(--color-white);
 }
 
 .adicionar__curso input[type="text"],
 .adicionar__curso textarea,
 .adicionar__curso select {
-    background-color: var(--color-white); 
-    border: 1px solid var(--color-gray-light); 
-    margin-bottom: 10px;
-    border-radius: 10px;
+	background-color: var(--color-white);
+	border: 1px solid var(--color-gray-light);
+	margin-bottom: 10px;
+	border-radius: 10px;
 }
 
-.adicionar__curso input[type="number"]{
-    max-width: 45px;
+.adicionar__curso input[type="number"] {
+	max-width: 45px;
 }
 
 .adicionar__curso v-select {
-    height: auto;
+	height: auto;
 }
 
 .categoria-select .v-select__selection {
-    color: var(--color-white);
+	color: var(--color-white);
 
 }
 
 .categoria-select .v-input__slot {
-    background-color: var(--color-gray-dark);
+	background-color: var(--color-gray-dark);
 }
 
 .agrupamento__container {
-    width: 75%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 1rem;
+	width: 75%;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	margin-bottom: 1rem;
 }
 
 
 .agrupamento__container label {
-    flex: 1;
-    margin-right: 1rem;
+	flex: 1;
+	margin-right: 1rem;
 }
 
 .agrupamento__container input,
 .agrupamento__container textarea,
 .agrupamento__container v-select,
 .agrupamento__container v-radio-group {
-    flex: 2;
+	flex: 2;
 }
 
 .certificacao__radio .v-label {
-    font-size: 1.2em!important;
+	font-size: 1.2em !important;
 }
 
 
 
-.lista__dos__cursos{
-    border-radius: 10px;
-    width: 500px;
+.lista__dos__cursos {
+	border-radius: 10px;
+	width: 500px;
 }
 
-.titulo__container{
-    animation: spin 2.5s linear infinite;
+.titulo__container {
+	margin-top: 10%;
+	margin-bottom: 15%;
+	animation: spin 2.5s linear infinite;
 }
 
 @keyframes spin {
-    0% {
-    border-color: var(--color-white);
-    }
-    25% {
-    border-color: #E0E0E0;
-    }
-    50% {
-    border-color: #909090;
-    }
-    75% {
-    border-color: var(--color-gray-dark);
-    }
-    100% {
-    border-color: var(--color-white);
-    }
-}
+	0% {
+		border-color: var(--color-white);
+	}
 
+	25% {
+		border-color: #E0E0E0;
+	}
+
+	50% {
+		border-color: #909090;
+	}
+
+	75% {
+		border-color: var(--color-gray-dark);
+	}
+
+	100% {
+		border-color: var(--color-white);
+	}
+}
 </style>

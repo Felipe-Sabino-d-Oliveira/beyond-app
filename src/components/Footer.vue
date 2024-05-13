@@ -2,10 +2,8 @@
   <v-footer class="footer bg-grey-lighten-1">
     <v-row justify="center" no-gutters>
 
-      <v-btn v-for="link in links" :key="link" class="mx-2" color="black" text>
-        <router-link v-if="link === 'Início'" to="/"> {{ link }} </router-link>
-        
-        <span v-else> {{ link }} </span>
+      <v-btn v-for="link in links" :key="link" class="mx-2" color="white" text>
+        <router-link :to="{ name: getRoute(link) }">{{ link }}</router-link>
       </v-btn>
 
       <v-col class="text-center mt-4" cols="12">
@@ -17,6 +15,7 @@
 
 <script>
 export default {
+  name: 'Footer',
   data: () => ({
     links: [
       'Início',
@@ -27,23 +26,23 @@ export default {
     ],
   }),
   methods: {
-        getRoute(link) {
-            switch (link) {
-                case 'Início':
-                    return '/';
-                case 'Cursos':
-                    return '/cursos';
-                case 'Mais Serviços':
-                    return '/mais-servicos';
-                case 'Blog':
-                    return '/blog';
-                case 'Sobre Nós':
-                    return '/sobre-nos';
-                default:
-                    return '';
-            }
-        }
-    },
+    getRoute(link) {
+      switch (link) {
+        case 'Início':
+          return 'home';
+        case 'Cursos':
+          return 'cursos';
+        case 'Mais Serviços':
+          return 'mais-servicos';
+        case 'Blog':
+          return 'blog';
+        case 'Sobre Nós':
+          return 'sobre-nos';
+        default:
+          return '';
+      }
+    }
+  },
 }
 </script>
 

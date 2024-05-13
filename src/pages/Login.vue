@@ -10,13 +10,13 @@
                     <v-text-field v-model="email" :error-messages="emailErrors" label="E-mail" required
                         @input="$v.email.$touch()" @blur="$v.email.$touch()">
                     </v-text-field>
-                    <v-text-field v-model="password" :error-messages="passwordErrors" label="Senha" required
+                    <v-text-field v-model="password" :error-messages="passwordErrors" label="Senha" type="password" required
                         @input="$v.password.$touch()" @blur="$v.password.$touch()">
                     </v-text-field>
                     <v-checkbox v-model="agree" label="Do you agree?" required @change="$v.agree.$touch()"
                         @blur="$v.agree.$touch()">
                     </v-checkbox>
-                    <v-btn class="mr-4" @click="submit" :disabled="!formValid">
+                    <v-btn class="mr-4" @click="submit(app)" :disabled="!formValid">
                         submit
                     </v-btn>
                     <v-btn @click="clear">
@@ -29,9 +29,15 @@
 </template>
   
 <script>
+import Vuelidate from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
+import { app, getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import router from '../route/router' // import the router module here
 
 export default {
+    mounted() {
+        this.$v = new Vuelidate(this)
+    },
     data: () => ({
         email: '',
         password: '',
@@ -47,15 +53,30 @@ export default {
         agree: { checked: (val) => val },
     },
     methods: {
-        submit() {
+        async submit() {
             this.$v.$touch()
             this.formValid = !this.$v.$invalid
+
             if (this.formValid) {
-                // enviar o formulário
+                try {
+                    const auth = getAuth(app)
+                    const { email, password } = this
+                    await signInWithEmailAndPassword(auth, email, password)
+
+                    // Login efetuado com sucesso! (redirecionar para página principal, etc.)
+                    console.log('Login realizado!')
+                    router.push('/')
+                } catch (error) {
+                    console.error('Erro ao realizar login:', error.message)
+                    // Exibir mensagem de erro para o usuário
+                    router.push('/login')
+                }
             }
         },
         clear() {
-            this.$v.$reset()
+            if (this.$v) {
+                this.$v.$reset()
+            }
             this.email = ''
             this.password = ''
             this.agree = false
@@ -83,12 +104,19 @@ export default {
     filter: grayscale(100%);
 }
 
+.div__transparente {
+    height: 50%;
+    width: 1200px;
+    background: var(--color-white);
+}
+
 .conteudo__login {
     margin-top: 10%;
     height: 50%;
     width: 1200px;
     display: flex;
     flex-direction: row;
+    background: rgb(214, 214, 16);
 }
 
 .metade__um__do__conteudo,
@@ -100,12 +128,12 @@ export default {
 }
 
 .metade__um__do__conteudo {
-    background: var(--color-gray-dark);
+    /* background: var(--color-gray-dark); */
 
 }
 
 .metade__dois__do__conteudo {
-    background: var(--color-gray-middle);
+    /* background: var(--color-gray-middle); */
     flex-direction: column;
 }
 
