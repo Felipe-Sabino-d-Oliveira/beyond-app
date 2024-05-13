@@ -28,6 +28,17 @@
                         Não tenho conta
                     </v-btn>
                 </form>
+                <v-dialog v-model="showRegisterDialog" max-width="750px">
+                    <v-card>
+                        <v-container class="adicionar__curso">
+                            <h2 class="titulo__container">Cadastro</h2>
+                        </v-container>
+                        <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="white darken-1" @click="register(); showRegisterDialog = false">Registrar</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
             </div>
         </section>
     </div>
@@ -51,6 +62,7 @@ export default {
         passwordErrors: [],
         checkboxErrors: [],
         formValid: false,
+        showRegisterDialog: false
     }),
     validations: {
         email: { required, email },
@@ -86,6 +98,12 @@ export default {
             this.password = ''
             this.agree = false
         },
+        goToRegister(){
+            this.showRegisterDialog = true;
+        },
+        register(){
+            this.showRegisterDialog = false;
+        }
     },
 }
 </script>
@@ -151,7 +169,7 @@ export default {
     width: 500px;
 }
 
-.botoes__login{
+.botoes__login {
     display: flex;
     margin-bottom: 10%;
 }
