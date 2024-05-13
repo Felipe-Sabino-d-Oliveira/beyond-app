@@ -16,11 +16,16 @@
                     <v-checkbox v-model="agree" label="Do you agree?" required @change="$v.agree.$touch()"
                         @blur="$v.agree.$touch()">
                     </v-checkbox>
-                    <v-btn class="mr-4" @click="submit(app)" :disabled="!formValid">
-                        submit
-                    </v-btn>
-                    <v-btn @click="clear">
-                        clear
+                    <div class="botoes__login">
+                        <v-btn class="mr-4" @click="submit(app)" :disabled="!formValid">
+                            submit
+                        </v-btn>
+                        <v-btn @click="clear">
+                            clear
+                        </v-btn>
+                    </div>
+                    <v-btn text @click="goToRegister">
+                        Não tenho conta
                     </v-btn>
                 </form>
             </div>
@@ -142,9 +147,12 @@ export default {
     font-size: 2.5em;
 }
 
-
-
 .imagem__login {
     width: 500px;
+}
+
+.botoes__login{
+    display: flex;
+    margin-bottom: 10%;
 }
 </style>
