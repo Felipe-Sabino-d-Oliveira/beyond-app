@@ -56,7 +56,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: calc(50% + 150px);
     margin: 10% auto;
     background-color: var(--color-gray-middle);
 }
@@ -75,7 +75,7 @@
     text-align: justify;
     justify-content: center;
     align-items: center;
-    width: 75%;
+    width: 80%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;

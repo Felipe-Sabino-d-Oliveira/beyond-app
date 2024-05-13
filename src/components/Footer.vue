@@ -4,6 +4,7 @@
 
       <v-btn v-for="link in links" :key="link" class="mx-2" color="black" text>
         <router-link v-if="link === 'Início'" to="/"> {{ link }} </router-link>
+        
         <span v-else> {{ link }} </span>
       </v-btn>
 
@@ -48,6 +49,7 @@ export default {
 
 <style>
 .footer {
-  z-index: 5;
+  z-index: 1;
+  height: 10%;
 }
 </style>

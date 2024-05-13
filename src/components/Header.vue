@@ -3,7 +3,7 @@
         <v-toolbar class="barra__de__tarefas" dark prominent elevation="4">
             <nav class="barra__d__navegacao text-center">
                 <v-btn v-for="link in links" :key="link" class="mx-2" color="white" text>
-                    <router-link  to="/cursos"> {{ link }} </router-link>
+                    <router-link  to="/"> {{ link }} </router-link>
                 </v-btn>
             </nav>
         </v-toolbar>
@@ -44,8 +44,7 @@ export default {
 </script>
 
 <style>
-.barra__de__tarefas,
-.footer {
+.barra__de__tarefas{
     z-index: 1;
 }
 
