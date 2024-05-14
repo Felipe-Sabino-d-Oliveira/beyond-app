@@ -10,8 +10,11 @@ const firebaseConfig = {
   projectId: "beyond-app-bfd2a",
   storageBucket: "beyond-app-bfd2a.appspot.com",
   messagingSenderId: "712933484810",
-  appId: "1:712933484810:web:67b779e51cef02f379b2f3"
+  appId: "1:712933484810:web:67b779e51cef02f379b2f3",
 };
 
 // Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
+
+export { app };

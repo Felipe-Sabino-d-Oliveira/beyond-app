@@ -5,6 +5,8 @@
                 <v-btn v-for="link in links" :key="link" class="mx-2" color="white" text>
                     <router-link :to="{ name: getRoute(link) }">{{ link }}</router-link>
                 </v-btn>
+                <v-btn class="botao__cad__ou__log">Cadastrar</v-btn>
+                <v-btn class="botao__cad__ou__log">Login</v-btn>
             </nav>
         </v-toolbar>
     </div>
@@ -51,5 +53,10 @@ export default {
 .barra__d__navegacao {
     align-self: center;
     width: 100%;
+}
+
+.botao__cad__ou__log:first-child{
+    margin-right: 10px;
+    
 }
 </style>

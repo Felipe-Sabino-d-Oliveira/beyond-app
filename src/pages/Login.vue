@@ -13,47 +13,78 @@
                     <v-text-field v-model="password" :error-messages="passwordErrors" label="Senha" type="password" required
                         @input="$v.password.$touch()" @blur="$v.password.$touch()">
                     </v-text-field>
-                    <v-checkbox v-model="agree" label="Do you agree?" required @change="$v.agree.$touch()"
-                        @blur="$v.agree.$touch()">
-                    </v-checkbox>
                     <div class="botoes__login">
-                        <v-btn class="mr-4" @click="submit(app)" :disabled="!formValid">
-                            submit
+                        <v-btn class="mr-4" @click="submit()">
+                            logar
                         </v-btn>
                         <v-btn @click="clear">
-                            clear
+                            limpar
                         </v-btn>
                     </div>
-                    <v-btn text @click="goToRegister">
-                        Não tenho conta
-                    </v-btn>
                 </form>
-                <v-dialog v-model="showRegisterDialog" max-width="750px">
+            </div>
+        </section>
+        <section class="conteudo__login">
+
+            <div class="metade__dois__do__conteudo">
+                <h1 class="titulo__login text-white">CADASTRO</h1>
+                <form>
+                    <v-text-field v-model="email" :error-messages="emailErrors" label="E-mail" required
+                        @input="$v.email.$touch()" @blur="$v.email.$touch()">
+                    </v-text-field>
+                    <v-text-field v-model="password" :error-messages="passwordErrors" label="Senha" type="password" required
+                        @input="$v.password.$touch()" @blur="$v.password.$touch()">
+                    </v-text-field>
+                    <div class="botoes__login">
+                        <v-btn class="mr-4" @click="submit()">
+                            cadastrar
+                        </v-btn>
+                        <v-btn @click="clear">
+                            limpar
+                        </v-btn>
+                    </div>
+                </form>
+                <v-dialog class="container__cadastro" v-model="showRegisterDialog" max-width="600px">
                     <v-card>
-                        <v-container class="adicionar__curso">
+                        <v-container>
                             <h2 class="titulo__container">Cadastro</h2>
+                            <div class="agrupamento__container">
+                                <v-text-field id="email-registro" v-model="registerEmail" :error-messages="emailErrors"
+                                    label="E-mail" required @input="$v.registerEmail.$touch()"
+                                    @blur="$v.registerEmail.$touch()">
+                                </v-text-field>
+                            </div>
+
+                            <div class="agrupamento__container">
+                                <v-text-field id="senha-registro" v-model="registerPassword"
+                                    :error-messages="passwordErrors" label="Senha" type="password" required
+                                    @input="$v.registerPassword.$touch()" @blur="$v.registerPassword.$touch()">
+                                </v-text-field>
+                            </div>
+
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="white darken-1"
+                                    @click="register(); showRegisterDialog = false">Registrar</v-btn>
+                            </v-card-actions>
                         </v-container>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="white darken-1" @click="register(); showRegisterDialog = false">Registrar</v-btn>
-                        </v-card-actions>
                     </v-card>
                 </v-dialog>
+            </div>
+            <div class="metade__um__do__conteudo">
+                <img class="imagem__login" src="../assets/login.png" alt="imagem login">
             </div>
         </section>
     </div>
 </template>
   
 <script>
-import Vuelidate from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
-import { app, getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import router from '../route/router' // import the router module here
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth'
+import { app } from '../config/index'
+import router from '../route/router'
 
 export default {
-    mounted() {
-        this.$v = new Vuelidate(this)
-    },
     data: () => ({
         email: '',
         password: '',
@@ -62,32 +93,37 @@ export default {
         passwordErrors: [],
         checkboxErrors: [],
         formValid: false,
-        showRegisterDialog: false
+        showRegisterDialog: false,
+        registerEmail: '',
+        registerPassword: '',
     }),
     validations: {
         email: { required, email },
         password: { required },
         agree: { checked: (val) => val },
+        registerEmail: { required, email },
+        registerPassword: { required },
     },
     methods: {
         async submit() {
-            this.$v.$touch()
-            this.formValid = !this.$v.$invalid
+            this.$v.$touch();
+            this.formValid = !this.$v.$invalid;
 
-            if (this.formValid) {
-                try {
-                    const auth = getAuth(app)
-                    const { email, password } = this
-                    await signInWithEmailAndPassword(auth, email, password)
+            if (this.$v.$invalid) {
+                console.warn('Formulário inválido. Valide os campos antes de enviar.');
+                return;
+            }
 
-                    // Login efetuado com sucesso! (redirecionar para página principal, etc.)
-                    console.log('Login realizado!')
-                    router.push('/')
-                } catch (error) {
-                    console.error('Erro ao realizar login:', error.message)
-                    // Exibir mensagem de erro para o usuário
-                    router.push('/login')
-                }
+            try {
+                const auth = getAuth(app);
+                const { email, password } = this;
+                await signInWithEmailAndPassword(auth, email, password);
+                console.log('Login realizado!');
+                this.formValid = true;
+                router.push('/');
+            } catch (error) {
+                console.error('Erro ao realizar login:', error.message);
+                router.push('/login');
             }
         },
         clear() {
@@ -98,15 +134,29 @@ export default {
             this.password = ''
             this.agree = false
         },
-        goToRegister(){
+        goToRegister() {
             this.showRegisterDialog = true;
         },
-        register(){
-            this.showRegisterDialog = false;
-        }
+        register() {
+            this.$v.$touch()
+            this.formValid = !this.$v.$invalid
+
+            if (this.formValid) {
+                const auth = getAuth(app)
+                createUserWithEmailAndPassword(auth, this.registerEmail, this.registerPassword)
+                    .then(() => {
+                        console.log('Usuário registrado com sucesso!')
+                        this.showRegisterDialog = false;
+                    })
+                    .catch((error) => {
+                        console.error('Erro ao registrar usuário:', error.message)
+                    })
+            }
+        },
     },
 }
 </script>
+
 
 <style>
 /* classes generalizadoras */
@@ -142,6 +192,10 @@ export default {
     background: rgb(214, 214, 16);
 }
 
+.conteudo__login:last-child{
+    margin-bottom: 10%;
+}
+
 .metade__um__do__conteudo,
 .metade__dois__do__conteudo {
     width: 50%;
@@ -151,12 +205,12 @@ export default {
 }
 
 .metade__um__do__conteudo {
-    /* background: var(--color-gray-dark); */
+    background: var(--color-gray-dark);
 
 }
 
 .metade__dois__do__conteudo {
-    /* background: var(--color-gray-middle); */
+    background: var(--color-gray-light);
     flex-direction: column;
 }
 
@@ -172,5 +226,9 @@ export default {
 .botoes__login {
     display: flex;
     margin-bottom: 10%;
+}
+
+.container__cadastro {
+    height: 5000000px;
 }
 </style>
