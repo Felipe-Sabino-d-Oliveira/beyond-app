@@ -48,7 +48,6 @@ export default {
 
 <style>
 .footer {
-  z-index: 1;
   height: 10%;
 }
 </style>
