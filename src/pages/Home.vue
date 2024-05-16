@@ -1,6 +1,6 @@
 <template>
-    <main>
-        <div class="container">
+    <v-main>
+        <v-container class="container">
             <div class="conteudo__principal">
                 <section>
                     <h1 class="titulo__conteudo">Por dentro da FICR</h1>
@@ -32,8 +32,8 @@
                     </p>
                 </section>
             </div>
-        </div>
-    </main>
+        </v-container>
+    </v-main>
 </template>
 
 <script>

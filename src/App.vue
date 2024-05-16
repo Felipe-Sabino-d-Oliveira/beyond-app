@@ -1,5 +1,5 @@
 <template>
-	<v-app v-if="$route.name!== 'login'">
+	<v-app v-if="$route.name !== 'login'">
 		<v-main class="main">
 			<Header />
 			<router-view></router-view>
@@ -17,5 +17,4 @@ import Footer from './components/Footer.vue';
 
 </script>
 
-<style>
-</style>
+<style></style>
