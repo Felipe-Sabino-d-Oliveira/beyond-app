@@ -1,13 +1,11 @@
 <template>
-    <div>
-        <v-toolbar class="barra__de__tarefas" dark prominent elevation="4">
-            <nav class="barra__d__navegacao text-center">
-                <v-btn v-for="link in links" :key="link" class="mx-2" color="white" text>
-                    <router-link :to="{ name: getRoute(link) }">{{ link }}</router-link>
-                </v-btn>
-            </nav>
-        </v-toolbar>
-    </div>
+    <v-toolbar class="barra__de__tarefas" dark prominent elevation="4">
+        <v-tolbar-items class="barra__d__navegacao text-center">
+            <v-btn v-for="link in links" :key="link" class="mx-2" color="white" text>
+                <router-link :to="{ name: getRoute(link) }">{{ link }}</router-link>
+            </v-btn>
+        </v-tolbar-items>
+    </v-toolbar>
 </template>
 
 <script>
@@ -54,8 +52,8 @@ export default {
     width: 100%;
 }
 
-.botao__cad__ou__log:first-child{
+.botao__cad__ou__log:first-child {
     margin-right: 10px;
-    
+
 }
 </style>

@@ -1,13 +1,13 @@
 <template>
-    <div class="container">
+    <v-container class="container">
         <section class="conteudo">
             <div class="conteudo__login__cadastro">
                 <div class="metade__um__do__conteudo">
                     <img class="imagem__login" src="../assets/login.png" alt="imagem login">
                 </div>
                 <div class="metade__dois__do__conteudo">
-                    <h1 class="titulo__login text-white">LOGIN</h1>
-                    <form>
+                    <v-title class="titulo__login text-white">LOGIN</v-title>
+                    <v-form>
                         <v-text-field v-model="email" :error-messages="emailErrors" label="E-mail" required
                             @input="$v.email.$touch()" @blur="$v.email.$touch()">
                         </v-text-field>
@@ -15,18 +15,18 @@
                             required @input="$v.password.$touch()" @blur="$v.password.$touch()">
                         </v-text-field>
                         <div class="botoes__login">
-                            <v-btn class="mr-4" @click="login()">
+                            <v-btn class="mr-4" v-on:click="login()">
                                 Entrar
                             </v-btn>
 
                         </div>
-                    </form>
+                    </v-form>
                 </div>
             </div>
             <div class="conteudo__login__cadastro">
                 <div class="metade__dois__do__conteudo">
-                    <h1 class="titulo__login text-white">CADASTRO</h1>
-                    <form>
+                    <v-title class="titulo__login text-white">CADASTRO</v-title>
+                    <v-form>
                         <v-text-field v-model="registerEmail" :error-messages="emailErrors" label="E-mail" required
                             @input="$v.email.$touch()" @blur="$v.email.$touch()">
                         </v-text-field>
@@ -34,11 +34,11 @@
                             type="password" required @input="$v.password.$touch()" @blur="$v.password.$touch()">
                         </v-text-field>
                         <div class="botoes__login">
-                            <v-btn class="mr-4" @click="register()">
+                            <v-btn class="mr-4" v-on:click="register()">
                                 cadastrar
                             </v-btn>
                         </div>
-                    </form>
+                    </v-form>
 
                 </div>
                 <div class="metade__um__do__conteudo">
@@ -47,7 +47,7 @@
             </div>
 
         </section>
-    </div>
+    </v-container>
 </template>
   
 <script>
@@ -79,7 +79,7 @@ export default {
                 this.mail = '';
                 this.password = '';
                 // Redirecionar para a página de início
-                this.$router.push('/home');
+                this.$router.push('/01101000011011110110111001100101');
             } catch (error) {
                 alert('Erro ao realizar login:', error.message);
                 console.error('Erro ao realizar login:', error.message);

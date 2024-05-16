@@ -1,6 +1,6 @@
 <template>
-	<main>
-		<div class="container">
+	<v-main>
+		<v-container class="container">
 			<v-btn class="botao__adicionar__curso" @click="abrirJanelaAdicionarCurso()">Adicionar Curso</v-btn>
 			<v-dialog v-model="dialogAdicionarCurso" max-width="750px">
 				<v-card>
@@ -146,8 +146,8 @@
 					</v-container>
 				</v-card>
 			</v-dialog>
-		</div>
-	</main>
+		</v-container>
+	</v-main>
 </template>
 
 <script>

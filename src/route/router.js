@@ -17,12 +17,12 @@ const routes = [
     component: Login
   },
   {
-    path: '/home',
+    path: '/01101000011011110110111001100101',
     name: 'home',
     component: Home
   },
   {
-    path: '/cursos',
+    path: '/0110001101110101011100100111001101110111',
     name: 'cursos',
     component: Cursos
   },
@@ -46,6 +46,6 @@ const routes = [
 const router = new VueRouter({
   history: true,
   routes
-})
+});
 
 export default router
