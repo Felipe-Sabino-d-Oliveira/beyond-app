@@ -1,14 +1,12 @@
 <template>
-	<v-app v-if="$route.name !== 'login'">
+	<v-app >
 		<v-main class="main">
-			<Header />
+			<Header v-if="$route.name !== 'login'" />
 			<router-view></router-view>
-			<Footer />
+			<Footer v-if="$route.name !== 'login'" />
 		</v-main>
 	</v-app>
-	<v-app v-else>
-		<router-view></router-view>
-	</v-app>
+
 </template>
 
 <script setup>

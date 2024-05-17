@@ -8,7 +8,22 @@ import Cursos from '../pages/Cursos.vue'
 // import Blog from '../pages/Blog.vue'
 // import SobreNos from '../pages/SobreNos.vue'
 
+import { getAuth } from 'firebase/auth';
+
 Vue.use(VueRouter);
+
+const authGuard = (to, from, next) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
+  if (!user) {
+    // Se o usuário não estiver autenticado, redirecione para a página de login
+    next('/');
+  } else {
+    // Se o usuário estiver autenticado, permita a navegação
+    next();
+  }
+};
 
 const routes = [
   {
@@ -19,12 +34,15 @@ const routes = [
   {
     path: '/01101000011011110110111001100101',
     name: 'home',
-    component: Home
+    component: Home,
+    beforeEnter: authGuard,
+
   },
   {
     path: '/0110001101110101011100100111001101110111',
     name: 'cursos',
-    component: Cursos
+    component: Cursos,
+    beforeEnter: authGuard, 
   },
 //   {
 //     path: '/mais-servicos',

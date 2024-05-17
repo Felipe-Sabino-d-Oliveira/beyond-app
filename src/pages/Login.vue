@@ -18,7 +18,6 @@
                             <v-btn class="mr-4" v-on:click="login()">
                                 Entrar
                             </v-btn>
-
                         </div>
                     </v-form>
                 </div>
@@ -84,6 +83,7 @@ export default {
                 alert('Erro ao realizar login:', error.message);
                 console.error('Erro ao realizar login:', error.message);
             }
+            
         },
         async register() {
             // Use createUserWithEmailAndPassword for registration
