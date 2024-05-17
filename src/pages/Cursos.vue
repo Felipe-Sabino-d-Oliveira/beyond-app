@@ -151,10 +151,7 @@
 </template>
 
 <script>
-import { mdiPencil, mdiDelete, } from '@mdi/js'
-import { getFirestore } from 'firebase/firestore';
-
-const db = getFirestore();
+import { mdiPencil,	mdiDelete,} from '@mdi/js'
 
 export default {
 	name: 'Cursos',
@@ -195,70 +192,25 @@ export default {
 		},
 
 		abrirJanelaAtualizarCurso(curso, index) {
-			const docRef = doc(db, 'cursos', curso.id);
-			getDoc(docRef)
-				.then((doc) => {
-					if (doc.exists()) {
-						this.novoCurso = doc.data();
-						this.dialogAtualizarCurso = true;
-						this.indexAtualizarCurso = index;
-					} else {
-						console.log('Nenhum curso encontrado com o ID:', curso.id);
-					}
-				})
-				(error) => {
-				console.error('Erro ao recuperar curso:', error);
-			});
+			// Copia os detalhes do curso para novoCurso
+			this.novoCurso = { ...curso };
+			this.dialogAtualizarCurso = true;
+			this.indexAtualizarCurso = index;
 		},
 
 		adicionarCurso() {
-			const curso = {
-				nome: this.novoCurso.nome,
-				descricao: this.novoCurso.descricao,
-				categoria: this.novoCurso.categoria,
-				instrutor: this.novoCurso.instrutor,
-				duracaoSemestres: this.novoCurso.duracaoSemestres,
-				certificacao: this.novoCurso.certificacao
-			};
-
-			addDoc(collection(db, 'cursos'), curso)
-				.then(() => {
-					console.log('Curso adicionado com sucesso!');
-					this.dialogAdicionarCurso = false;
-				})
-				.catch((error) => {
-					console.error('Erro ao adicionar curso:', error);
-				});
+			this.cursos.push(this.novoCurso);
+			this.dialogAdicionarCurso = false;
 		},
 		removerCurso(index) {
-			const curso = this.cursos[index];
-			deleteDoc(doc(db, 'cursos', curso.id))
-				.then(() => {
-					console.log('Curso removido com sucesso!');
-					this.cursos.splice(index, 1);
-				})
-				(error) => {
-				console.error('Erro ao remover curso:', error);
-			});
+			this.cursos.splice(index, 1);
 		},
 
-		atualizarCurso(index) {
-			const curso = this.cursos[index];
-			setDoc(doc(db, 'cursos', curso.id), {
-				nome: this.novoCurso.nome,
-				descricao: this.novoCurso.descricao,
-				categoria: this.novoCurso.categoria,
-				instrutor: this.novoCurso.instrutor,
-				duracaoSemestres: this.novoCurso.duracaoSemestres,
-				certificacao: this.novoCurso.certificacao
-			})
-				.then(() => {
-					console.log('Curso atualizado com sucesso!');
-					this.dialogAtualizarCurso = false;
-				})
-				(error) => {
-				console.error('Erro ao atualizar curso:', error);
-			});
+		atualizarCurso() {
+			if (this.indexAtualizarCurso !== -1) {
+				this.cursos.splice(this.indexAtualizarCurso, 1, this.novoCurso);
+				this.dialogAtualizarCurso = false;
+			}
 		},
 	}
 }
