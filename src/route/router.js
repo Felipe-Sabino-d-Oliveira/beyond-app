@@ -32,14 +32,14 @@ const routes = [
     component: Login
   },
   {
-    path: '/01101000011011110110111001100101',
+    path: '/home',
     name: 'home',
     component: Home,
     beforeEnter: authGuard,
 
   },
   {
-    path: '/0110001101110101011100100111001101110111',
+    path: '/cursos',
     name: 'cursos',
     component: Cursos,
     beforeEnter: authGuard, 

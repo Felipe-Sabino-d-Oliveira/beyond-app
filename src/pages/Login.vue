@@ -78,7 +78,7 @@ export default {
                 this.mail = '';
                 this.password = '';
                 // Redirecionar para a página de início
-                this.$router.push('/01101000011011110110111001100101');
+                this.$router.push('/home');
             } catch (error) {
                 alert('Erro ao realizar login:', error.message);
                 console.error('Erro ao realizar login:', error.message);
