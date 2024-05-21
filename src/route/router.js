@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Login from '../pages/Login.vue'
+import Cadastro from '../pages/Cadastro.vue'
 import Home from '../pages/Home.vue'
 import Cursos from '../pages/Cursos.vue'
 // import MaisServicos from '../pages/MaisServicos.vue'
@@ -23,13 +24,18 @@ const authGuard = (to, from, next) => {
     // Se o usuário estiver autenticado, permita a navegação
     next();
   }
-};
+}; 
 
 const routes = [
   {
     path: '/',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/cadastro',
+    name: 'cadastro',
+    component: Cadastro
   },
   {
     path: '/home',

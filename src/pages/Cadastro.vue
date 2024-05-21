@@ -2,69 +2,68 @@
     <v-container class="container">
         <section class="conteudo">
             <div class="conteudo__login__cadastro">
-                <div class="metade__um__do__conteudo">
-                    <img class="imagem__login" src="../assets/login.png" alt="imagem login">
-                </div>
                 <div class="metade__dois__do__conteudo">
-                    <v-title class="titulo__login text-white">LOGIN</v-title>
+                    <v-title class="titulo__login text-white">CADASTRO</v-title>
                     <v-form>
-                        <v-text-field v-model="email" :error-messages="emailErrors" label="E-mail" required
+                        <v-text-field v-model="registerEmail" :error-messages="emailErrors" label="E-mail" required
                             @input="$v.email.$touch()" @blur="$v.email.$touch()">
                         </v-text-field>
-                        <v-text-field v-model="password" :error-messages="passwordErrors" label="Senha" type="password"
-                            required @input="$v.password.$touch()" @blur="$v.password.$touch()">
+                        <v-text-field v-model="registerPassword" :error-messages="passwordErrors" label="Senha"
+                            type="password" required @input="$v.password.$touch()" @blur="$v.password.$touch()">
                         </v-text-field>
                         <div class="botoes__login">
-                            <v-btn class="mr-4" v-on:click="login()">
-                                Entrar
+                            <v-btn class="mr-4" v-on:click="register()">
+                                cadastrar
                             </v-btn>
-                        </div>
-                        <div class="redirecionar">
-                            <router-link :to="cadastro"><p>Não tem uma conta? Cadastre-se</p></router-link>
+                            <v-icon>
+                                {{ icons.mdiArrowLeft }}
+                            </v-icon>
                         </div>
                     </v-form>
+                </div>
+                <div class="metade__um__do__conteudo">
+                    <img class="imagem__login" src="../assets/login.png" alt="imagem login">
                 </div>
             </div>
         </section>
     </v-container>
 </template>
-  
+
 <script>
+import { mdiArrowLeft } from '@mdi/js';
 import { required, email } from 'vuelidate/lib/validators'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { app } from '../config/index'
 
 export default {
     data: () => ({
-        email: '',
-        password: '',
         emailErrors: [],
         passwordErrors: [],
+        registerEmail: '',
+        registerPassword: '',
     }),
     validations: {
-        email: { required, email },
-        password: { required },
+        registerEmail: { required, email },
+        registerPassword: { required },
+    },
+    icons: {
+        mdiArrowLeft,
     },
     methods: {
-        async login() {
+        async register() {
+            // Use createUserWithEmailAndPassword for registration
             try {
-                const auth = getAuth();
-                await signInWithEmailAndPassword(auth, this.email, this.password);
-                alert('Login realizado!');
-                this.mail = '';
-                this.password = '';
-                // Redirecionar para a página de início
-                this.$router.push('/home');
+                const { registerEmail, registerPassword } = this;
+                const auth = getAuth(app);
+                await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
+                alert('Usuário registrado com sucesso!');
+                this.registerEmail = '';
+                this.registerPassword = '';
             } catch (error) {
-                alert('Erro ao realizar login:', error.message);
-                console.error('Erro ao realizar login:', error.message);
+                alert('Erro ao registrar usuário:', error.message);
+                console.error('Erro ao registrar usuário:', error.message);
             }
-
         },
-    },
-    computed: {
-        isLoggedIn() {
-            return this.$store.getters['auth/isLoggedIn'];
-        }
     },
 }
 </script>
@@ -150,7 +149,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 5%;
+    margin-bottom: 0;
 }
 
 .container__cadastro {

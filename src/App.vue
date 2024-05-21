@@ -1,9 +1,9 @@
 <template>
 	<v-app >
 		<v-main class="main">
-			<Header v-if="$route.name !== 'login'" />
+			<Header v-if="$route.name !== 'login' && $route.name !== 'cadastro'" />
 			<router-view></router-view>
-			<Footer v-if="$route.name !== 'login'" />
+			<Footer v-if="$route.name !== 'login' && $route.name !== 'cadastro'" />
 		</v-main>
 	</v-app>
 

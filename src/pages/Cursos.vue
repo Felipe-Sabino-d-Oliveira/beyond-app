@@ -5,7 +5,7 @@
 			<v-dialog v-model="dialogAdicionarCurso" max-width="750px">
 				<v-card>
 					<v-container class="adicionar__curso">
-						<h2 class="titulo__container">Adicionar curso</h2>
+						<vue-h2 class="titulo__container">Adicionar curso</vue-h2>
 						<div class="agrupamento__container">
 							<label for="nome-curso">Nome do Curso</label>
 							<input id="nome-curso" v-model="novoCurso.nome" type="text">
@@ -61,7 +61,7 @@
 				</v-card>
 			</v-dialog>
 			<v-container v-if="cursos.length > 0" class="listar__curso">
-				<h2 class="titulo__container">Lista de Cursos Cadastrados</h2>
+				<vue-h2 class="titulo__container">Lista de Cursos Cadastrados</vue-h2>
 				<v-list class="lista__dos__cursos">
 					<v-list-item v-for="(curso, index) in cursos" :key="curso.id">
 						<v-list-item-content>
@@ -89,7 +89,7 @@
 			<v-dialog v-model="dialogAtualizarCurso" max-width="750px">
 				<v-card>
 					<v-container class="adicionar__curso">
-						<h2 class="titulo__container">Atualizar curso</h2>
+						<vue-h2 class="titulo__container">Atualizar curso</vue-h2>
 						<div class="agrupamento__container">
 							<label for="nome-curso">Nome do Curso</label>
 							<input id="nome-curso" v-model="novoCurso.nome" type="text">
@@ -223,7 +223,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	max-width: 100%;
-	min-height: 1200px;
+	height: 1000px;
 	background-image: url('https://lh3.googleusercontent.com/p/AF1QipPAbeq77kzNitDnQD4rssOYSjd5xwYpv-ltxQh3=s680-w680-h510');
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -289,7 +289,8 @@ export default {
 .agrupamento__container {
 	width: 75%;
 	display: flex;
-	justify-content: space-evenly;
+
+	justify-content: center;
 	align-items: center;
 	margin-bottom: 1rem;
 }
