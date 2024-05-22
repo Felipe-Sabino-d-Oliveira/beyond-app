@@ -79,6 +79,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
+    margin-bottom: 10%;
 }
 
 .secoes__conteudo__principal p:nth-child(odd) {

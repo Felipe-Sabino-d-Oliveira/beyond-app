@@ -3,7 +3,7 @@
         <section class="conteudo">
             <div class="conteudo__login__cadastro">
                 <div class="metade__dois__do__conteudo">
-                    <v-title class="titulo__login text-white">CADASTRO</v-title>
+                    <h1 class="titulo__login text-white">CADASTRO</h1>
                     <v-form>
                         <v-text-field v-model="registerEmail" :error-messages="emailErrors" label="E-mail" required
                             @input="$v.email.$touch()" @blur="$v.email.$touch()">
@@ -11,13 +11,17 @@
                         <v-text-field v-model="registerPassword" :error-messages="passwordErrors" label="Senha"
                             type="password" required @input="$v.password.$touch()" @blur="$v.password.$touch()">
                         </v-text-field>
-                        <div class="botoes__login">
-                            <v-btn class="mr-4" v-on:click="register()">
+                        <div class="grupo_botoes__login">
+                            <v-btn class="mr-4 botao" v-on:click="register()">
                                 cadastrar
                             </v-btn>
-                            <v-icon>
-                                {{ icons.mdiArrowLeft }}
-                            </v-icon>
+                            <v-btn class="mr-4 botao">
+                                <router-link to="/">
+                                    <v-icon>
+                                        {{ icons.mdiArrowLeft }}
+                                    </v-icon>
+                                </router-link>
+                            </v-btn>
                         </div>
                     </v-form>
                 </div>
@@ -36,18 +40,19 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { app } from '../config/index'
 
 export default {
+    name: 'Cadastro',
     data: () => ({
         emailErrors: [],
         passwordErrors: [],
         registerEmail: '',
         registerPassword: '',
+        icons: {
+            mdiArrowLeft,
+        },
     }),
     validations: {
         registerEmail: { required, email },
         registerPassword: { required },
-    },
-    icons: {
-        mdiArrowLeft,
     },
     methods: {
         async register() {
@@ -59,6 +64,8 @@ export default {
                 alert('Usuário registrado com sucesso!');
                 this.registerEmail = '';
                 this.registerPassword = '';
+                // Redirecionar para a página de login
+                this.$router.push('/');
             } catch (error) {
                 alert('Erro ao registrar usuário:', error.message);
                 console.error('Erro ao registrar usuário:', error.message);
@@ -145,14 +152,15 @@ export default {
     width: 500px;
 }
 
-.botoes__login {
+.grupo_botoes__login {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 0;
 }
 
-.container__cadastro {
-    height: 5000000px;
+.botao:first-child{
+    margin-bottom: 15%;
 }
+
 </style>

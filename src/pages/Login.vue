@@ -6,7 +6,7 @@
                     <img class="imagem__login" src="../assets/login.png" alt="imagem login">
                 </div>
                 <div class="metade__dois__do__conteudo">
-                    <v-title class="titulo__login text-white">LOGIN</v-title>
+                    <h1 class="titulo__login text-white">LOGIN</h1>
                     <v-form>
                         <v-text-field v-model="email" :error-messages="emailErrors" label="E-mail" required
                             @input="$v.email.$touch()" @blur="$v.email.$touch()">
@@ -20,7 +20,7 @@
                             </v-btn>
                         </div>
                         <div class="redirecionar">
-                            <router-link :to="cadastro"><p>Não tem uma conta? Cadastre-se</p></router-link>
+                            <router-link to="cadastro">Não tem uma conta? Cadastre-se</router-link>
                         </div>
                     </v-form>
                 </div>
@@ -34,6 +34,7 @@ import { required, email } from 'vuelidate/lib/validators'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 export default {
+    name: 'Login',
     data: () => ({
         email: '',
         password: '',
