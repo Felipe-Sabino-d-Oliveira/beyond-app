@@ -1,5 +1,5 @@
 <template>
-  <v-footer class="footer bg-grey-lighten-1">
+  <v-footer class="footer" dark outlined elevation="8">
     <v-row class="d-flex justify-center align-center" no-gutters>
 
       <v-btn v-for="link in links" :key="link" class="mx-2" color="white">
@@ -48,7 +48,7 @@ export default {
 
 <style>
 .footer {
-  height: 10%;
-  background: var(--gradient-blue-light)
+  height: 15%;
+  background: var(--gradient-blue-3)
 }
 </style>

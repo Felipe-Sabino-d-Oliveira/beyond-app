@@ -75,11 +75,11 @@ export default {
 .container {
     max-width: 100%;
     height: 100% !important;
-    background: var(--gradient-blue-4);
+    background: var(--gradient-blue-3);
 }
 
 .card__login {
-    background: var(--gradient-blue-5);
+    background: var(--gradient-blue-4);
 }
 
 .formulario__login {
