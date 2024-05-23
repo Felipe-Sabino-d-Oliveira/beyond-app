@@ -58,7 +58,7 @@ export default {
                 this.registerEmail = '';
                 this.registerPassword = '';
                 // Redirecionar para a página de login
-                this.$router.push('/');
+                this.$router.push('/home');
             } catch (error) {
                 alert('Erro ao registrar usuário:', error.message);
                 console.error('Erro ao registrar usuário:', error.message);
