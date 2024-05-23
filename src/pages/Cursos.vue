@@ -216,7 +216,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
 	align-items: center;
 	margin: 0 auto;
@@ -228,7 +228,6 @@ export default {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
-	filter: grayscale(100%);
 }
 
 

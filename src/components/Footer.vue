@@ -1,9 +1,9 @@
 <template>
   <v-footer class="footer bg-grey-lighten-1">
-    <v-row justify="center" no-gutters>
+    <v-row class="d-flex justify-center align-center" no-gutters>
 
-      <v-btn v-for="link in links" :key="link" class="mx-2" color="white" text>
-        <router-link :to="{ name: getRoute(link) }">{{ link }}</router-link>
+      <v-btn v-for="link in links" :key="link" class="mx-2" color="white">
+        <router-link class="text-decoration-none" :to="{ name: getRoute(link) }">{{ link }}</router-link>
       </v-btn>
 
       <v-col class="text-center mt-4" cols="12">
@@ -49,5 +49,6 @@ export default {
 <style>
 .footer {
   height: 10%;
+  background: var(--gradient-blue-light)
 }
 </style>

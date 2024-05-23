@@ -4,4 +4,9 @@
     --color-gray-dark: #404040;
     --color-gray-middle: #808080;
     --color-gray-light: #C0C0C0;
+    --gradient-blue-light: radial-gradient(circle at 10% 20%, rgb(137, 247, 254) 0%, rgb(102, 166, 255) 90%);
+    --gradient-blue-2: radial-gradient(circle at -0.1% 100.8%, rgb(0, 234, 255) 0.2%, rgb(0, 124, 255) 59.1%, rgb(198, 0, 255) 100.2%);
+    --gradient-blue-3: linear-gradient(179.2deg, rgb(21, 21, 212) 0.9%, rgb(53, 220, 243) 95.5%);
+    --gradient-blue-4: linear-gradient(181deg, rgb(17, 51, 143) 15%, rgb(97, 149, 219) 158.5%);
+    --gradient-blue-5: radial-gradient(circle at 85.4% 50.8%, rgba(95, 142, 204, 0.26) 158.5%, rgb(22, 42, 97) 15%);
 }
