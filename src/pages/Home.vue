@@ -1,7 +1,7 @@
 <template>
     <v-main>
-        <v-container class="container">
-            <v-card elevation="8" outlined dark class="conteudo__principal d-flex justify-center align-center">
+        <v-container class="container" height="100%">
+            <v-card elevation="8" outlined dark class="conteudo__principal d-flex flex-column align-center mx-auto" width="33%">
                 <v-card-title>
                     Por dentro da FICR
                 </v-card-title>
@@ -47,36 +47,13 @@
 
 <style scoped>
 .container {
-    max-width: 100%;
-    height: 100%;
+    max-width: 100%; /* N funciona lá em cima */
     background: var(--gradient-blue-3)
 }
 
 .conteudo__principal {
-    display: flex;
-    flex-direction: column;
-    width: calc(33%);
-    margin: auto;
-    background: var(--gradient-blue-);
-    backface-visibility: 50%;
+    background: var(--gradient-blue-3);
 }
 
-.secoes__conteudo__principal {
-    font-size: 1.1em;
-    color: var(--color-white);
-    text-align: justify;
-    width: 80%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-    margin-bottom: 5%;
-}
 
-.secoes__conteudo__principal p:nth-child(odd) {
-    grid-column: 1;
-}
-
-.secoes__conteudo__principal p:nth-child(even) {
-    grid-column: 2;
-}
 </style>

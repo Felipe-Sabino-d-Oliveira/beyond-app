@@ -1,67 +1,62 @@
 <template>
 	<v-main>
-		<v-container class="container">
+		<v-container class="container mx-auto d-flex flex-column align-center">
 			<v-btn class="botao__adicionar__curso" @click="abrirJanelaAdicionarCurso()">Adicionar Curso</v-btn>
 			<v-dialog v-model="dialogAdicionarCurso" max-width="750px">
-				<v-card>
-					<v-container class="adicionar__curso">
-						<vue-h2 class="titulo__container">Adicionar curso</vue-h2>
-						<div class="agrupamento__container">
-							<label for="nome-curso">Nome do Curso</label>
-							<input id="nome-curso" v-model="novoCurso.nome" type="text">
-						</div>
+				<v-card class=".adicionar__curso"><!-- lembrar do ponto impedindo execução da classe -->
+					<v-card-title class="titulo__container">Adicionar curso</v-card-title>
+					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+						<label for="nome-curso">Nome do Curso</label>
+						<input id="nome-curso" v-model="novoCurso.nome" type="text">
+					</v-row>
 
-						<div class="agrupamento__container">
-							<label for="descricao-curso">Descrição</label>
-							<textarea id="descricao-curso" v-model="novoCurso.descricao"></textarea>
-						</div>
+					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+						<label for="descricao-curso">Descrição</label>
+						<textarea id="descricao-curso" v-model="novoCurso.descricao"></textarea>
+					</v-row>
 
-						<div class="agrupamento__container">
-							<label>Categoria</label>
-							<v-select v-model="novoCurso.categoria" :items="categorias" class="categoria-select">
-								<template #selection="{ item }">
-									<div class="v-select__selection v-input__slot">
-										<span>{{ item }}</span>
-									</div>
-								</template>
-							</v-select>
-						</div>
+					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+						<label>Categoria</label>
+						<v-select v-model="novoCurso.categoria" :items="categorias" class="categoria-select">
+							<template #selection="{ item }">
+								<div class="v-select__selection v-input__slot">
+									<span>{{ item }}</span>
+								</div>
+							</template>
+						</v-select>
+					</v-row>
 
-						<div class="agrupamento__container">
-							<label for="instrutor-curso">Instrutor(a)</label>
-							<input id="instrutor-curso" v-model="novoCurso.instrutor" type="text">
-						</div>
+					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+						<label for="instrutor-curso">Instrutor(a)</label>
+						<input id="instrutor-curso" v-model="novoCurso.instrutor" type="text">
+					</v-row>
 
-						<div class="agrupamento__container">
-							<label for="duracao-semestres">Duração do curso (em semestres)</label>
-							<input id="duracao-semestres" v-model="novoCurso.duracaoSemestres" type="number" min="5"
-								max="12">
-						</div>
+					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+						<label for="duracao-semestres">Duração do curso (em semestres)</label>
+						<input id="duracao-semestres" v-model="novoCurso.duracaoSemestres" type="number" min="5" max="12">
+					</v-row>
 
-						<div class="agrupamento__container">
-							<label>Certificação</label>
-							<v-radio-group v-model="novoCurso.certificacao">
-								<v-radio class="certificacao__radio" label="Sim" value="sim"></v-radio>
-								<v-radio class="certificacao__radio" label="Não" value="nao"></v-radio>
-							</v-radio-group>
-						</div>
+					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+						<label>Certificação</label>
+						<v-radio-group v-model="novoCurso.certificacao">
+							<v-radio class="certificacao__radio" label="Sim" value="sim"></v-radio>
+							<v-radio class="certificacao__radio" label="Não" value="nao"></v-radio>
+						</v-radio-group>
+					</v-row>
 
-						<div class="agrupamento__container">
-							<v-card-actions>
-								<v-spacer></v-spacer>
-								<v-btn color="white darken-1"
-									@click="adicionarCurso(); dialogAdicionarCurso = false">Adicionar Curso</v-btn>
-							</v-card-actions>
-							<v-card-actions>
-								<v-spacer></v-spacer>
-								<v-btn color="white darken-1" @click="dialogAdicionarCurso = false">Fechar</v-btn>
-							</v-card-actions>
-						</div>
-					</v-container>
+					<v-card-actions>
+						<v-btn color="white darken-1" @click="adicionarCurso(); dialogAdicionarCurso = false">Adicionar
+							Curso
+						</v-btn>
+					</v-card-actions>
+					<v-card-actions>
+						<v-btn color="white darken-1" @click="dialogAdicionarCurso = false">Fechar</v-btn>
+					</v-card-actions>
 				</v-card>
 			</v-dialog>
-			<v-container v-if="cursos.length > 0" class="listar__curso">
-				<vue-h2 class="titulo__container">Lista de Cursos Cadastrados</vue-h2>
+			<v-card v-if="cursos.length > 0" class="listar__curso">
+				<v-card-title class=".titulo__container">Lista de Cursos Cadastrados</v-card-title><!-- lembrar do ponto impedindo execução da classe -->
+				<!-- FALTA MUDAR DAQUI PARA BAIXO!! -->
 				<v-list class="lista__dos__cursos">
 					<v-list-item v-for="(curso, index) in cursos" :key="curso.id">
 						<v-list-item-content>
@@ -85,7 +80,7 @@
 						</v-btn>
 					</v-list-item>
 				</v-list>
-			</v-container>
+			</v-card>
 			<v-dialog v-model="dialogAtualizarCurso" max-width="750px">
 				<v-card>
 					<v-container class="adicionar__curso">
@@ -151,7 +146,7 @@
 </template>
 
 <script>
-import { mdiPencil,	mdiDelete,} from '@mdi/js'
+import { mdiPencil, mdiDelete, } from '@mdi/js'
 
 export default {
 	name: 'Cursos',
@@ -218,16 +213,8 @@ export default {
 
 <style scoped>
 .container {
-	align-items: center;
-	margin: 0 auto;
-	display: flex;
-	flex-direction: column;
 	max-width: 100%;
-	height: 1000px;
-	background-image: url('https://lh3.googleusercontent.com/p/AF1QipPAbeq77kzNitDnQD4rssOYSjd5xwYpv-ltxQh3=s680-w680-h510');
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
+	background: var(--gradient-blue-3);
 }
 
 
