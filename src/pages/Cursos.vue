@@ -1,61 +1,63 @@
 <template>
 	<v-main>
-		<v-container class="container mx-auto d-flex flex-column align-center">
-			<v-btn class="botao__adicionar__curso" @click="abrirJanelaAdicionarCurso()">Adicionar Curso</v-btn>
-			<v-dialog v-model="dialogAdicionarCurso" max-width="750px">
-				<v-card class=".adicionar__curso"><!-- lembrar do ponto impedindo execução da classe -->
-					<v-card-title class="titulo__container">Adicionar curso</v-card-title>
-					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+		<v-container class="mx-auto d-flex flex-column justify-center align-center"
+			style="min-width: 100%; background: var(--gradient-blue-3);">
+			<v-btn class="" @click="abrirJanelaAdicionarCurso()" color="white" style="margin: 1% auto;">Adicionar
+				Curso</v-btn>
+			<v-dialog class="ma-0 d-flex" v-model="dialogAdicionarCurso" width="75%">
+				<v-card dark class="ma-0 px-5 d-flex flex-column justify-center"
+					style="background: var(--gradient-blue-3);">
+					<v-card-title>Adicionar curso</v-card-title>
+
+					<v-card floating elevation="0" style="background: none;">
 						<label for="nome-curso">Nome do Curso</label>
 						<input id="nome-curso" v-model="novoCurso.nome" type="text">
-					</v-row>
+					</v-card>
 
-					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+					<v-card floating elevation="0" style="background: none;">
 						<label for="descricao-curso">Descrição</label>
 						<textarea id="descricao-curso" v-model="novoCurso.descricao"></textarea>
-					</v-row>
+					</v-card>
 
-					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+					<v-card floating elevation="0" style="background: none; width: 50%;">
 						<label>Categoria</label>
-						<v-select v-model="novoCurso.categoria" :items="categorias" class="categoria-select">
+						<v-select v-model="novoCurso.categoria" :items="categorias" style="max-width: 50%;">
 							<template #selection="{ item }">
-								<div class="v-select__selection v-input__slot">
-									<span>{{ item }}</span>
-								</div>
+								<span>{{ item }}</span>
 							</template>
 						</v-select>
-					</v-row>
+					</v-card>
 
-					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+					<v-card floating elevation="0" style="background: none;">
 						<label for="instrutor-curso">Instrutor(a)</label>
 						<input id="instrutor-curso" v-model="novoCurso.instrutor" type="text">
-					</v-row>
+					</v-card>
 
-					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+					<v-card floating elevation="0" style="background: none;">
 						<label for="duracao-semestres">Duração do curso (em semestres)</label>
 						<input id="duracao-semestres" v-model="novoCurso.duracaoSemestres" type="number" min="5" max="12">
-					</v-row>
+					</v-card>
 
-					<v-row class=".agrupamento__container"><!-- lembrar do ponto impedindo execução da classe -->
+					<v-card floating elevation="0" style="background: none;">
 						<label>Certificação</label>
 						<v-radio-group v-model="novoCurso.certificacao">
 							<v-radio class="certificacao__radio" label="Sim" value="sim"></v-radio>
 							<v-radio class="certificacao__radio" label="Não" value="nao"></v-radio>
 						</v-radio-group>
-					</v-row>
+					</v-card>
 
 					<v-card-actions>
-						<v-btn color="white darken-1" @click="adicionarCurso(); dialogAdicionarCurso = false">Adicionar
-							Curso
-						</v-btn>
-					</v-card-actions>
-					<v-card-actions>
-						<v-btn color="white darken-1" @click="dialogAdicionarCurso = false">Fechar</v-btn>
+						<v-btn light color="white darken-1"
+							@click="adicionarCurso(); dialogAdicionarCurso = false">Adicionar
+							Curso</v-btn>
+						<v-btn light color="white darken-1" @click="dialogAdicionarCurso = false">Fechar</v-btn>
 					</v-card-actions>
 				</v-card>
 			</v-dialog>
+			<!-- FALTA MODIFICAR A PARTIR DAQUI!!! -->
 			<v-card v-if="cursos.length > 0" class="listar__curso">
-				<v-card-title class=".titulo__container">Lista de Cursos Cadastrados</v-card-title><!-- lembrar do ponto impedindo execução da classe -->
+				<v-card-title>Lista de Cursos
+					Cadastrados</v-card-title><!-- lembrar do ponto impedindo execução da classe -->
 				<!-- FALTA MUDAR DAQUI PARA BAIXO!! -->
 				<v-list class="lista__dos__cursos">
 					<v-list-item v-for="(curso, index) in cursos" :key="curso.id">
@@ -84,7 +86,7 @@
 			<v-dialog v-model="dialogAtualizarCurso" max-width="750px">
 				<v-card>
 					<v-container class="adicionar__curso">
-						<vue-h2 class="titulo__container">Atualizar curso</vue-h2>
+						<v-card-title>Atualizar curso</v-card-title>
 						<div class="agrupamento__container">
 							<label for="nome-curso">Nome do Curso</label>
 							<input id="nome-curso" v-model="novoCurso.nome" type="text">
@@ -212,18 +214,15 @@ export default {
 </script>
 
 <style scoped>
-.container {
-	max-width: 100%;
-	background: var(--gradient-blue-3);
-}
+.container {}
 
-
+/* 
 .botao__adicionar__curso {
 	margin: 150px 0;
 }
 
 .adicionar__curso {
-	max-width: 100%;
+	width: 50%;
 }
 
 .adicionar__curso div label {
@@ -308,7 +307,6 @@ export default {
 .titulo__container {
 	margin-top: 10%;
 	margin-bottom: 15%;
-	animation: spin 2.5s linear infinite;
 }
 
 @keyframes spin {
@@ -331,5 +329,5 @@ export default {
 	100% {
 		border-color: var(--color-white);
 	}
-}
+} */
 </style>

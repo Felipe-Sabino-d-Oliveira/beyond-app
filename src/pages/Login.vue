@@ -11,20 +11,18 @@
                 </v-text-field>
 
             </v-form>
-            <v-card-actions>
-                <v-btn light class="mr-4" v-on:click="login()">
-                    <v-icon>
-                        {{ icons.mdiLogin }}
-                    </v-icon>
+            <v-card-actions class="d-flex flex-column">
+                <v-btn light class="mb-4" width="150" min-width="75" v-on:click="login()">
+                    Entrar
                 </v-btn>
-                <p style="margin: 0; color: var(--color-white);">Não tem uma conta? <router-link style="color: var(--color-white);" to="cadastro">Cadastre-se</router-link></p>
+                <p style="margin: 0;">Não tem uma conta? <router-link style="color: var(--color-white);"
+                        to="cadastro">Cadastre-se</router-link></p>
             </v-card-actions>
         </v-card>
     </v-container>
 </template>
   
 <script>
-import { mdiLogin } from '@mdi/js';
 import { required, email } from 'vuelidate/lib/validators'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
@@ -35,9 +33,7 @@ export default {
         password: '',
         emailErrors: [],
         passwordErrors: [],
-        icons:{
-            mdiLogin,
-        }
+        
     }),
     validations: {
         email: { required, email },

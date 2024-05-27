@@ -1,27 +1,29 @@
 <template>
     <v-container class="d-flex justify-center align-center">
-        <v-card dark class="card__cadastro d-flex flex-column justify-center align-center" width="500" height="550">
-            <h1>CADASTRO</h1>
-            <v-form class="formulario__cadastro">
-                <v-text-field v-model="registerEmail" :error-messages="emailErrors" label="E-mail" required
-                    @input="$v.email.$touch()" @blur="$v.email.$touch()">
-                </v-text-field>
-                <v-text-field v-model="registerPassword" :error-messages="passwordErrors" label="Senha" type="password"
-                    required @input="$v.password.$touch()" @blur="$v.password.$touch()">
-                </v-text-field>
-                <div class="d-flex justify-center">
-                    <v-btn light class="mr-4 align-self-center" v-on:click="register()">
-                        cadastrar
-                    </v-btn>
-                    <router-link to="/">
-                        <v-btn light class="mr-4 align-self-center">
-                            <v-icon>
-                                {{ icons.mdiArrowLeft }}
-                            </v-icon>
+        <v-card elevation="0" style="background: none;">
+            <router-link to="/">
+                <v-btn elevation="1" class="rounded-b-0" dark style="background: var(--gradient-blue-4);">
+                    <v-icon>
+                        {{ icons.mdiArrowLeft }}
+                    </v-icon>
+                </v-btn>
+            </router-link>
+            <v-card dark class="card__cadastro d-flex flex-column justify-center align-center" width="500" height="550">
+                <h1>CADASTRO</h1>
+                <v-form class="formulario__cadastro">
+                    <v-text-field v-model="registerEmail" :error-messages="emailErrors" label="E-mail" required
+                        @input="$v.email.$touch()" @blur="$v.email.$touch()">
+                    </v-text-field>
+                    <v-text-field v-model="registerPassword" :error-messages="passwordErrors" label="Senha" type="password"
+                        required @input="$v.password.$touch()" @blur="$v.password.$touch()">
+                    </v-text-field>
+                    <v-card elevation="0" class="d-flex justify-center" style="background: none;">
+                        <v-btn light class="mr-4 align-self-center" v-on:click="register()">
+                            cadastrar
                         </v-btn>
-                    </router-link>
-                </div>
-            </v-form>
+                    </v-card>
+                </v-form>
+            </v-card>
         </v-card>
     </v-container>
 </template>
