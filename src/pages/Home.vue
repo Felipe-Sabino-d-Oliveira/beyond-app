@@ -1,7 +1,7 @@
 <template>
     <v-main>
         <v-container class="container" height="100%">
-            <v-card elevation="8" outlined dark class="conteudo__principal d-flex flex-column align-center mx-auto" width="33%">
+            <v-card elevation="8" outlined dark class="conteudo__principal d-flex flex-column align-center mx-auto" min-width="620px" width="33%">
                 <v-card-title>
                     Por dentro da FICR
                 </v-card-title>

@@ -5,9 +5,6 @@ import Login from '../pages/Login.vue'
 import Cadastro from '../pages/Cadastro.vue'
 import Home from '../pages/Home.vue'
 import Cursos from '../pages/Cursos.vue'
-// import MaisServicos from '../pages/MaisServicos.vue'
-// import Blog from '../pages/Blog.vue'
-// import SobreNos from '../pages/SobreNos.vue'
 
 import { getAuth } from 'firebase/auth';
 
@@ -24,7 +21,7 @@ const authGuard = (to, from, next) => {
     // Se o usuário estiver autenticado, permita a navegação
     next();
   }
-}; 
+};
 
 const routes = [
   {
@@ -42,34 +39,18 @@ const routes = [
     name: 'home',
     component: Home,
     beforeEnter: authGuard,
-
   },
   {
     path: '/cursos',
     name: 'cursos',
     component: Cursos,
-    beforeEnter: authGuard, 
+    beforeEnter: authGuard,
   },
-//   {
-//     path: '/mais-servicos',
-//     name: 'mais-servicos',
-//     component: MaisServicos
-//   },
-//   {
-//     path: '/blog',
-//     name: 'blog',
-//     component: Blog
-//   },
-//   {
-//     path: '/sobre-nos',
-//     name: 'sobre-nos',
-//     component: SobreNos
-//   }
 ]
 
 const router = new VueRouter({
-  history: true,
+  mode: 'history',
   routes
 });
 
-export default router
+export default router;
