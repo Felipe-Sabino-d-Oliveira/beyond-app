@@ -47,8 +47,7 @@
 			</v-dialog>
 
 			<!-- Displaying each course as a separate card -->
-			<v-card elevation="8" v-if="cursos.length > 0" class="d-flex flex-wrap justify-center" width="50%"
-				style="background: var(--gradient-blue-4);">
+			<v-container elevation="8" v-if="cursos.length > 0" class="d-flex flex-wrap justify-center" style="background: var(--gradient-blue-4); width: 50%; border-radius: 5px;">
 				<v-card dark v-for="curso in cursos" :key="curso.id" elevation="8" class="ma-3"
 					style="background: var(--gradient-blue-3);">
 					<v-card-title>{{ curso.nome }}</v-card-title>
@@ -68,7 +67,7 @@
 						</v-btn>
 					</v-card-actions>
 				</v-card>
-			</v-card>
+			</v-container>
 
 			<v-dialog v-model="dialogAtualizarCurso" max-width="480px" width="50%">
 				<v-card elevation="8" dark class="px-5 d-flex flex-column justify-center mx-auto"
