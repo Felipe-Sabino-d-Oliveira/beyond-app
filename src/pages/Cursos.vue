@@ -9,11 +9,13 @@
 					<v-card-title>Adicionar curso</v-card-title>
 					<v-card-text class="d-flex flex-row align-center justify-space-between">
 						<label for="nome-curso">Nome do Curso</label>
-						<input id="nome-curso" v-model="novoCurso.nome" type="text" style="background-color: white; border-radius: 5px">
+						<input id="nome-curso" v-model="novoCurso.nome" type="text"
+							style="background-color: white; border-radius: 5px">
 					</v-card-text>
 					<v-card-text class="d-flex flex-row align-center justify-space-between">
 						<label for="descricao-curso">Descrição</label>
-						<textarea id="descricao-curso" v-model="novoCurso.descricao" style="max-width: 70%; background-color: white; border-radius: 5px;"></textarea>
+						<textarea id="descricao-curso" v-model="novoCurso.descricao"
+							style="max-width: 70%; background-color: white; border-radius: 5px;"></textarea>
 					</v-card-text>
 					<v-card-text class="d-flex flex-row align-center justify-space-between">
 						<label>Categoria</label>
@@ -25,11 +27,13 @@
 					</v-card-text>
 					<v-card-text class="d-flex flex-row align-center justify-space-between">
 						<label for="instrutor-curso">Instrutor(a)</label>
-						<input id="instrutor-curso" v-model="novoCurso.instrutor" type="text" style="background-color: white; border-radius: 5px">
+						<input id="instrutor-curso" v-model="novoCurso.instrutor" type="text"
+							style="background-color: white; border-radius: 5px">
 					</v-card-text>
 					<v-card-text class="d-flex flex-row align-center justify-space-between">
 						<label for="duracao-semestres">Duração do curso (em semestres)</label>
-						<input id="duracao-semestres" v-model="novoCurso.duracaoSemestres" type="number" min="5" max="12" style="background-color: white; border-radius: 5px">
+						<input id="duracao-semestres" v-model="novoCurso.duracaoSemestres" type="number" min="5" max="12"
+							style="background-color: white; border-radius: 5px">
 					</v-card-text>
 					<v-card-text class="d-flex flex-row align-center justify-space-between">
 						<label>Certificação</label>
@@ -47,7 +51,8 @@
 			</v-dialog>
 
 			<!-- Displaying each course as a separate card -->
-			<v-container elevation="8" v-if="cursos.length > 0" class="d-flex flex-wrap justify-center" style="background: var(--gradient-blue-4); width: 50%; border-radius: 5px;">
+			<v-container elevation="8" v-if="cursos.length > 0" class="d-flex flex-wrap justify-center"
+				style="background: var(--gradient-blue-4); width: 50%; border-radius: 5px;">
 				<v-card dark v-for="curso in cursos" :key="curso.id" elevation="8" class="ma-3"
 					style="background: var(--gradient-blue-3);">
 					<v-card-title>{{ curso.nome }}</v-card-title>
@@ -116,11 +121,10 @@
 
 <script>
 import { mdiPencil, mdiDelete, } from '@mdi/js'
-import { updateDoc, collection, addDoc, onSnapshot, doc, deleteDoc } from 'firebase/firestore';
-import { db } from "../config/index";
+import axios from 'axios';
 
 export default {
-	name: 'Cursos',
+	name: 'PageCursos',
 	data: () => ({
 		cursos: [],
 		novoCurso: {
@@ -134,12 +138,11 @@ export default {
 		categorias: ['Tecnologia', 'Saúde', 'Educação', 'Negócios', 'Artes'],
 		dialogAdicionarCurso: false,
 		dialogAtualizarCurso: false,
-		indexAtualizarCurso: -1, // Inicialize com um valor que não interfere nos índices
+		indexAtualizarCurso: -1,
 		icons: { mdiPencil, mdiDelete }
 	}),
 	methods: {
 		abrirJanelaAdicionarCurso() {
-			// Limpa o estado novoCurso
 			this.novoCurso = {
 				nome: '',
 				descricao: '',
@@ -150,36 +153,55 @@ export default {
 			};
 			this.dialogAdicionarCurso = true;
 		},
-
 		abrirJanelaAtualizarCurso(curso) {
-			// Copia os detalhes do curso para novoCurso
 			this.novoCurso = { ...curso };
 			this.dialogAtualizarCurso = true;
 		},
-
 		adicionarCurso() {
-			addDoc(collection(db, 'cursos'), this.novoCurso).then(() => {
-				this.dialogAdicionarCurso = false;
-			});
+			axios.post('http://localhost:3000/content', this.novoCurso)
+				.then(() => {
+					this.dialogAdicionarCurso = false;
+					this.carregarCursos();
+				})
+				.catch(error => {
+					console.error(error);
+				});
 		},
 		removerCurso(id) {
-			deleteDoc(doc(db, 'cursos', id));
+			axios.delete(`http://localhost:3000/contents/${id}`)
+				.then(() => {
+					this.carregarCursos();
+				})
+				.catch(error => {
+					console.error(error);
+				});
 		},
 		atualizarCurso() {
-			const cursoRef = doc(db, 'cursos', this.novoCurso.id);
-			updateDoc(cursoRef, this.novoCurso).then(() => {
-				this.dialogAtualizarCurso = false;
-			});
+			axios.put(`http://localhost:3000/contents/${this.novoCurso.id}`, this.novoCurso)
+				.then(() => {
+					this.dialogAtualizarCurso = false;
+					this.carregarCursos();
+				})
+				.catch(error => {
+					console.error(error);
+				});
 		},
 		carregarCursos() {
-			onSnapshot(collection(db, 'cursos'), (snapshot) => {
-				this.cursos = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-			});
+			axios.get('http://localhost:3000/contents')
+				.then(response => {
+					this.cursos = response.data;
+				})
+				.catch(error => {
+					console.error(error);
+				});
 		}
 	},
-	mounted() {	this.carregarCursos(); }
+	mounted() {
+		this.carregarCursos();
+	}
 }
 </script>
+
 
 <style scoped>
 /* Estilos adicionais para os cards e layout geral */
@@ -196,5 +218,4 @@ export default {
 v-card-text {
 	display: flex;
 	flex-direction: row;
-}
-</style>
+}</style>
