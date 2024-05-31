@@ -2,7 +2,7 @@
 	<v-main>
 		<v-container class="mx-auto d-flex flex-column justify-center align-center"
 			style="min-width: 100%; background: var(--gradient-blue-3);">
-			<v-btn @click="abrirJanelaAdicionarCurso()" color="white" style="margin: 1% auto;">Adicionar Curso</v-btn>
+			<v-btn @click="abrirJanelaAdicionarCurso()" color="white" style="margin: 5% auto 1% auto;">Adicionar Curso</v-btn>
 			<v-dialog v-model="dialogAdicionarCurso" max-width="480px" width="50%">
 				<v-card elevation="8" dark class="px-5 d-flex flex-column justify-center mx-auto"
 					style="background: var(--gradient-blue-3); overflow-y: auto;">
@@ -52,9 +52,9 @@
 
 			<!-- Displaying each course as a separate card -->
 			<v-container elevation="8" v-if="cursos.length > 0" class="d-flex flex-wrap justify-center"
-				style="background: var(--gradient-blue-4); width: 50%; border-radius: 5px;">
+				style="background: var(--gradient-blue-4); width: 50%; min-width: 1045px; border-radius: 5px; margin-bottom: 5%;">
 				<v-card dark v-for="curso in cursos" :key="curso.id" elevation="8" class="ma-3"
-					style="background: var(--gradient-blue-3);">
+					style="background: var(--gradient-blue-3); max-width: 300px;">
 					<v-card-title>{{ curso.nome }}</v-card-title>
 					<v-card-subtitle>{{ curso.descricao }}</v-card-subtitle>
 					<v-card-text>
@@ -135,7 +135,7 @@ export default {
 			duracaoSemestres: 0,
 			certificacao: ''
 		},
-		categorias: ['Tecnologia', 'Saúde', 'Educação', 'Negócios', 'Artes'],
+		categorias: ['Agricultura e Meio Ambiente', 'Artes', 'Ciências Exatas', 'Ciências Naturais', 'Ciências Sociais', 'Comunicação', 'Construção', 'Direito', 'Educação', 'Engenharias', 'Humanidades', 'Negócios', 'Tecnologia', 'Saúde', 'Serviços'],
 		dialogAdicionarCurso: false,
 		dialogAtualizarCurso: false,
 		indexAtualizarCurso: -1,
