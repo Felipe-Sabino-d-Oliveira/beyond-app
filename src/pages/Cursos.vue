@@ -120,7 +120,7 @@
 </template>
 
 <script>
-import { mdiPencil, mdiDelete, } from '@mdi/js'
+import { mdiPencil, mdiDelete } from '@mdi/js';
 import axios from 'axios';
 
 export default {
@@ -202,7 +202,6 @@ export default {
 }
 </script>
 
-
 <style scoped>
 /* Estilos adicionais para os cards e layout geral */
 .d-flex.flex-wrap.justify-center {
@@ -218,4 +217,5 @@ export default {
 v-card-text {
 	display: flex;
 	flex-direction: row;
-}</style>
+}
+</style>
